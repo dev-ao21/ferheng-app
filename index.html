@@ -1,237 +1,368 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ferheng - Modern Kurmanji Dictionary</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ferheng - Modern Kurdish Dictionary</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-        }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Oxygen, Ubuntu, Cantarell, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background: linear-gradient(135deg, #0f1511 0%, #000000 100%);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
+      .language-selector {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+      }
 
-        .card {
-            background: white;
-            border-radius: 20px;
-            padding: 50px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            margin-bottom: 30px;
-        }
+      .language-selector select {
+        padding: 8px 12px;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 8px;
+        font-size: 14px;
+        cursor: pointer;
+        outline: none;
+        transition: all 0.3s ease;
+      }
 
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
+      .language-selector select:hover {
+        background: white;
+        border-color: rgba(255, 255, 255, 0.6);
+      }
 
-        .app-icon {
-            width: 120px;
-            height: 120px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 25px;
-            margin: 0 auto 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 60px;
-            color: white;
-            font-weight: bold;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 40px 20px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .content {
+        background: white;
+        padding: 50px;
+        border-radius: 20px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        text-align: center;
+      }
+
+      .logo {
+        width: 120px;
+        height: 120px;
+        margin: 0 auto 30px;
+        display: block;
+        border-radius: 16px;
+      }
+
+      h1 {
+        font-size: 2.5em;
+        margin-bottom: 10px;
+      }
+
+      .subtitle {
+        font-size: 1.2em;
+        color: #666;
+        margin-bottom: 30px;
+      }
+
+      .description {
+        font-size: 1.1em;
+        color: #555;
+        margin-bottom: 40px;
+        line-height: 1.8;
+      }
+
+      .features {
+        text-align: left;
+        margin: 40px auto;
+        max-width: 600px;
+      }
+
+      .feature {
+        font-size: 1.1em;
+        margin-bottom: 15px;
+        color: #444;
+      }
+
+      .download-buttons {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin: 40px 0;
+        align-items: center;
+      }
+
+      .store-badge {
+        width: auto;
+        transition: all 0.3s ease;
+      }
+
+      .android-badge {
+        height: 80px;
+      }
+
+      .ios-badge {
+        height: 60px;
+      }
+
+      .store-badge:hover {
+        transform: translateY(-2px);
+        filter: brightness(1.1);
+      }
+
+      .support {
+        margin: 40px 0 20px;
+        padding: 20px;
+        background: #f8f9fa;
+        border-radius: 10px;
+      }
+
+      .support p {
+        color: #666;
+        font-size: 0.95em;
+      }
+
+      .support a {
+        color: #278e43;
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      .support a:hover {
+        text-decoration: underline;
+      }
+
+      footer {
+        text-align: center;
+        padding: 20px;
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 0.9em;
+      }
+
+      @media (max-width: 768px) {
+        .content {
+          padding: 30px 20px;
         }
 
         h1 {
-            font-size: 2.5em;
-            color: #2d3748;
-            margin-bottom: 10px;
+          font-size: 2em;
         }
 
-        .tagline {
-            font-size: 1.2em;
-            color: #718096;
-            margin-bottom: 30px;
+        .subtitle {
+          font-size: 1em;
         }
 
-        .description {
-            font-size: 1.1em;
-            color: #4a5568;
-            margin-bottom: 30px;
-            line-height: 1.8;
+        .download-buttons {
+          flex-direction: column;
+          align-items: center;
         }
-
-        .features {
-            margin: 40px 0;
-        }
-
-        .features h2 {
-            color: #2d3748;
-            margin-bottom: 20px;
-            font-size: 1.8em;
-        }
-
-        .feature-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .feature-list li {
-            padding: 15px 0;
-            padding-left: 35px;
-            position: relative;
-            color: #4a5568;
-            font-size: 1.05em;
-        }
-
-        .feature-list li:before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: #667eea;
-            font-weight: bold;
-            font-size: 1.3em;
-        }
-
-        .languages {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin: 30px 0;
-            justify-content: center;
-        }
-
-        .language-badge {
-            background: #f7fafc;
-            padding: 10px 20px;
-            border-radius: 25px;
-            color: #667eea;
-            font-weight: 600;
-            border: 2px solid #e2e8f0;
-        }
-
-        .contact-section {
-            background: #f7fafc;
-            padding: 30px;
-            border-radius: 15px;
-            margin-top: 40px;
-            text-align: center;
-        }
-
-        .contact-section h2 {
-            color: #2d3748;
-            margin-bottom: 15px;
-        }
-
-        .contact-email {
-            color: #667eea;
-            text-decoration: none;
-            font-size: 1.2em;
-            font-weight: 600;
-        }
-
-        .contact-email:hover {
-            text-decoration: underline;
-        }
-
-        .footer {
-            text-align: center;
-            color: white;
-            padding: 20px;
-            font-size: 0.9em;
-        }
-
-        .app-store-badge {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 15px 30px;
-            background: #000;
-            color: white;
-            text-decoration: none;
-            border-radius: 10px;
-            font-weight: 600;
-            transition: transform 0.2s;
-        }
-
-        .app-store-badge:hover {
-            transform: scale(1.05);
-        }
-
-        @media (max-width: 600px) {
-            .card {
-                padding: 30px 25px;
-            }
-
-            h1 {
-                font-size: 2em;
-            }
-
-            .app-icon {
-                width: 100px;
-                height: 100px;
-                font-size: 50px;
-            }
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <div class="card">
-            <div class="header">
-                <div class="app-icon">F</div>
-                <h1>Ferheng</h1>
-                <p class="tagline">Modern Kurmanji Dictionary</p>
-            </div>
+      <div class="language-selector">
+        <select id="languageSelect" onchange="changeLanguage()">
+          <option value="en">English</option>
+          <option value="de">Deutsch</option>
+          <option value="ar">العربية</option>
+          <option value="ku">Kurdî</option>
+          <option value="tr" disabled>Türkçe (soon)</option>
+          <option value="fa" disabled>فارسی (soon)</option>
+        </select>
+      </div>
+      <div class="content">
+        <img src="assets/logo.png" alt="Ferheng Logo" class="logo" />
 
-            <div class="description">
-                <p>Ferheng is a modern Kurmanji dictionary designed to make learning and using the Kurdish language easier. With its modern features and simple design, it supports both learners and native speakers who want to strengthen their Kurdish.</p>
-            </div>
+        <h1 id="title">Ferheng</h1>
+        <p class="subtitle" id="subtitle">
+          Modern & Multilingual Kurdish Dictionary
+        </p>
 
-            <div class="features">
-                <h2>Designed for Everyone</h2>
-                <p class="description">
-                    The app was designed with multi-language support in mind, because many Kurds grow up in countries where Kurdish is not officially taught, or are born abroad. While they may understand basic Kurdish, they are often more fluent in another language that they learned in school.
-                </p>
-            </div>
+        <p class="description" id="description">
+          Whether you are just starting to learn Kurdish or already fluent,
+          Ferheng helps you explore the language in a simple and practical way.
+        </p>
 
-            <div style="text-align: center;">
-                <h3 style="color: #2d3748; margin-bottom: 20px;">Available in Multiple Languages</h3>
-                <div class="languages">
-                    <span class="language-badge">English</span>
-                    <span class="language-badge">German</span>
-                    <span class="language-badge">Arabic</span>
-                    <span class="language-badge">Kurdish</span>
-                </div>
-                <p style="color: #718096; margin-top: 15px;">Navigate and learn in the language you're most comfortable with</p>
-            </div>
-
-            <div class="contact-section">
-                <h2>Need Support?</h2>
-                <p style="color: #4a5568; margin-bottom: 15px;">We're here to help! Contact us for any questions or feedback.</p>
-                <a href="mailto:app.ferheng@gmail.com" class="contact-email">app.ferheng@gmail.com</a>
-            </div>
-
-            <!-- Uncomment when app is live on App Store
-            <div style="text-align: center;">
-                <a href="YOUR_APP_STORE_LINK" class="app-store-badge">Download on the App Store</a>
-            </div>
-            -->
+        <div class="features">
+          <div class="feature" id="feature1">
+            🔍 More than 400,000 Kurdish words and phrases
+          </div>
+          <div class="feature" id="feature2">
+            🌎 Translate from and to Kurdish
+          </div>
+          <div class="feature" id="feature3">
+            📱 Full Offline usage after initial install
+          </div>
+          <div class="feature" id="feature4">
+            ❤️ Favorites & History - Save words and track your learning journey
+          </div>
+          <div class="feature" id="feature5">
+            🌐 Multi-language UI - Kurdish, English, German, Arabic interface
+            (soon Turkish and Persian)
+          </div>
+          <div class="feature" id="feature6">✨ And much more!</div>
         </div>
 
-        <div class="footer">
-            <p>&copy; 2024 Ferheng by Abdo Omar. All rights reserved.</p>
+        <div class="download-buttons">
+          <a
+            href="https://play.google.com/store/apps/details?id=dev.omar.ferheng"
+            target="_blank"
+          >
+            <img
+              src="assets/GetItOnGooglePlay_Badge_Web_color_English.svg"
+              alt="Get it on Google Play"
+              class="store-badge android-badge"
+            />
+          </a>
+          <a
+            href="https://apps.apple.com/app/ferheng-kurdish-dictionary/id6753351443"
+            target="_blank"
+          >
+            <img
+              src="assets/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg"
+              alt="Download on the App Store"
+              class="store-badge ios-badge"
+            />
+          </a>
         </div>
+
+        <div class="support">
+          <p id="supportText">
+            Need help or have feedback? Contact us at:
+            <a href="mailto:app.ferheng@gmail.com">app.ferheng@gmail.com</a>
+          </p>
+        </div>
+      </div>
     </div>
-</body>
+
+    <footer>
+      <p id="copyright">© 2025 Ferheng. All rights reserved.</p>
+    </footer>
+
+    <script>
+      const translations = {
+        en: {
+          title: "Ferheng",
+          subtitle: "Modern & Multilingual Kurdish Dictionary",
+          description:
+            "Whether you are just starting to learn Kurdish or already fluent, Ferheng helps you explore the language in a simple and practical way.",
+          feature1: "🔍 More than 400,000 Kurdish words and phrases",
+          feature2: "🌎 Translate from and to Kurdish",
+          feature3: "📱 Full Offline usage after initial install",
+          feature4:
+            "❤️ Favorites & History - Save words and track your learning journey",
+          feature5:
+            "🌐 Multi-language UI - Kurdish, English, German, Arabic interface (soon Turkish and Persian)",
+          feature6: "✨ And much more!",
+          supportText: "Need help or have feedback? Contact us at:",
+          copyright: "© 2025 Abdo Omar. All rights reserved.",
+        },
+        de: {
+          title: "Ferheng",
+          subtitle: "Modernes & Mehrsprachiges Kurdisches Wörterbuch",
+          description:
+            "Egal, ob du gerade erst beginnst, Kurdisch zu lernen, oder bereits fließend sprichst – Ferheng hilft dir, die Sprache auf einfache und praktische Weise zu entdecken.",
+          feature1: "🔍 Mehr als 400.000 kurdische Wörter und Ausdrücke",
+          feature2: "🌎 Übersetzung von und ins Kurdische",
+          feature3:
+            "📱 Vollständige Offline-Nutzung nach der ersten Installation",
+          feature4:
+            "❤️ Favoriten & Verlauf - Speichere Wörter und verfolge deinen Lernfortschritt",
+          feature5:
+            "🌐 Mehrsprachige Benutzeroberfläche - Kurdisch, Englisch, Deutsch, Arabisch (bald Türkisch und Persisch)",
+          feature6: "✨ Und vieles mehr!",
+          supportText:
+            "Brauchst Du Hilfe oder hast du Feedback? Kontaktiere uns unter:",
+          copyright: "© 2025 Abdo Omar. Alle Rechte vorbehalten.",
+        },
+        ar: {
+          title: "Ferheng",
+          subtitle: "قاموس كردي حديث ومتعدد اللغات",
+          description:
+            "سواء كنت قد بدأت للتو في تعلم اللغة الكردية أو كنت تتحدثها بطلاقة، يساعدك فرهنگ على استكشاف اللغة بطريقة بسيطة وعملية.",
+          feature1: "🔍 أكثر من 400,000 كلمة وعبارة كردية",
+          feature2: "🌎 الترجمة من وإلى اللغة الكردية",
+          feature3: "📱 استخدام كامل دون اتصال بالإنترنت بعد التثبيت الأولي",
+          feature4:
+            "❤️ المفضلة والسجل - احفظ الكلمات وتتبع رحلة التعلم الخاصة بك",
+          feature5:
+            "🌐 واجهة متعددة اللغات - واجهة كردية وإنجليزية وألمانية وعربية (قريباً التركية والفارسية)",
+          feature6: "✨ والكثير غير ذلك!",
+          supportText: "هل تحتاج إلى مساعدة أو لديك ملاحظات؟ اتصل بنا على:",
+          copyright: "© 2025 Abdo Omar. جميع الحقوق محفوظة.",
+        },
+        ku: {
+          title: "Ferheng",
+          subtitle: "Ferhenga Kurdî ya Modern û Pirzimanî",
+          description:
+            "Heke tu nû dest bi fêrbûna Kurdî dikî an jî jixwe baş diaxivî, Ferheng alîkariyê te dike ku tu bi awayekî hêsan û pratîkî zimanê Kurdî fêr bibî.",
+          feature1: "🔍 Zêdetirî 400,000 peyv û hevok bi kurdî",
+          feature2: "🌎 Wergerandin ji Kurdî û bo Kurdî",
+          feature3: "📱 Dibe offline piştî saz kirinê",
+          feature4:
+            "❤️ Favorî — Peyvan tomar bike û rêwîtiya fêrbûna xwe bişopîne",
+          feature5:
+            "🌐 Navrûya pir zimanî - Navrûya kurdî, îngilîzî, elmanî, erebî (nêzîk dê Tirkî û Farsî jî)",
+          feature6: "✨ Û gelek tiştên din!",
+          supportText: "Support:",
+          copyright: "© 2025 Abdo Omar. All rights reserved.",
+        },
+      };
+
+      function changeLanguage() {
+        const lang = document.getElementById("languageSelect").value;
+        const t = translations[lang];
+
+        if (t) {
+          document.getElementById("title").textContent = t.title;
+          document.getElementById("subtitle").textContent = t.subtitle;
+          document.getElementById("description").textContent = t.description;
+          document.getElementById("feature1").textContent = t.feature1;
+          document.getElementById("feature2").textContent = t.feature2;
+          document.getElementById("feature3").textContent = t.feature3;
+          document.getElementById("feature4").textContent = t.feature4;
+          document.getElementById("feature5").textContent = t.feature5;
+          document.getElementById("feature6").textContent = t.feature6;
+
+          document.getElementById("supportText").innerHTML =
+            t.supportText +
+            ' <a href="mailto:app.ferheng@gmail.com">app.ferheng@gmail.com</a>';
+          document.getElementById("copyright").textContent = t.copyright;
+
+          // Update HTML lang attribute for accessibility
+          document.documentElement.lang = lang;
+
+          // Store preference
+          localStorage.setItem("preferredLanguage", lang);
+        }
+      }
+
+      // Load saved language preference
+      window.addEventListener("DOMContentLoaded", () => {
+        const savedLang = localStorage.getItem("preferredLanguage");
+        if (savedLang && translations[savedLang]) {
+          document.getElementById("languageSelect").value = savedLang;
+          changeLanguage();
+        }
+      });
+    </script>
+  </body>
 </html>
