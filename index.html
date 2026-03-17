@@ -252,10 +252,13 @@
     </div>
 
     <footer>
-      <p id="copyright">© 2025 Ferheng. All rights reserved.</p>
+      <p id="copyright">© <span id="year"></span> Ferheng. All rights reserved.</p>
     </footer>
 
     <script>
+      const currentYear = new Date().getFullYear();
+      document.getElementById("year").textContent = currentYear;
+
       const translations = {
         en: {
           title: "Ferheng",
@@ -271,7 +274,7 @@
             "🌐 Multi-language UI - Kurdish, English, German, Arabic, Turkish and Persian interface",
           feature6: "✨ And much more!",
           supportText: "Need help or have feedback? Contact us at:",
-          copyright: "© 2025 Abdo Omar. All rights reserved.",
+          copyright: "© {year} Abdo Omar. All rights reserved.",
         },
         de: {
           title: "Ferheng",
@@ -289,7 +292,7 @@
           feature6: "✨ Und vieles mehr!",
           supportText:
             "Brauchst Du Hilfe oder hast du Feedback? Kontaktiere uns unter:",
-          copyright: "© 2025 Abdo Omar. Alle Rechte vorbehalten.",
+          copyright: "© {year} Abdo Omar. Alle Rechte vorbehalten.",
         },
         ar: {
           title: "Ferheng",
@@ -305,7 +308,7 @@
             "🌐 واجهة متعددة اللغات - واجهة كردية وإنجليزية وألمانية وعربية وتركية وفارسية",
           feature6: "✨ والكثير غير ذلك!",
           supportText: "هل تحتاج إلى مساعدة أو لديك ملاحظات؟ اتصل بنا على:",
-          copyright: "© 2025 Abdo Omar. جميع الحقوق محفوظة.",
+          copyright: "© {year} Abdo Omar. جميع الحقوق محفوظة.",
         },
         ku: {
           title: "Ferheng",
@@ -321,7 +324,7 @@
             "🌐 Navrûya pir zimanî - Navrûya kurdî, îngilîzî, elmanî, erebî, tirkî û farsî",
           feature6: "✨ Û gelek tiştên din!",
           supportText: "Support:",
-          copyright: "© 2026 Abdo Omar. All rights reserved.",
+          copyright: "© {year} Abdo Omar. All rights reserved.",
         },
       };
 
@@ -343,7 +346,7 @@
           document.getElementById("supportText").innerHTML =
             t.supportText +
             ' <a href="mailto:app.ferheng@gmail.com">app.ferheng@gmail.com</a>';
-          document.getElementById("copyright").textContent = t.copyright;
+          document.getElementById("copyright").textContent = t.copyright.replace("{year}", currentYear);
 
           // Update HTML lang attribute for accessibility
           document.documentElement.lang = lang;
